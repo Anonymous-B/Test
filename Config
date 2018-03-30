@@ -1,0 +1,29 @@
+#!/bin/bash
+sudo apt-get update
+sudo apt-get dist-upgrade
+sudo apt-get clean
+sudo apt-get install realvnc-vnc-server realvnc-vnc-viewer
+
+
+# install Apache2
+
+sudo apt-get install apache2 -y
+
+# Disable Apache2
+
+sudo service apache2 stop
+
+# Enable Apache2
+
+sudo service apache2 start
+
+# Exfat
+sudo apt-get install exfat-utils exfat-fuse
+
+
+sudo raspi-config
+
+#Remove Package
+sudo apt-get purge wolfram-engine libreoffice* -y
+sudo apt-get clean #Clean cache
+sudo apt-get autoremove -y #Remove dependencies

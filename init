@@ -1,0 +1,12 @@
+The best way to boot start to edit rc.local from /etc/ after comment before exit 0 other methond don't work now.
+#! /bin/sh
+# /etc/init.d/main_script.py
+### BEGIN INIT INFO
+# Provides:          main_script.py
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start daemon at boot time
+# Description:       Enable service provided by daemon.
+### END INIT INFO

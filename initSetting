@@ -1,0 +1,40 @@
+fypksk@gmail.com pass: b3
+raspi-config
+Resolution:
+Interface: VNC, SSH,
+Localisation: US, Asia Karachi, United States English(US,en), PK Pakistan
+
+Healess: raspi-config: Advanced Options: GL Driver: G3 GL Lagacy.
+
+Terminal: Mono 14, #1EC503
+
+Exfat
+sudo apt-get install exfat-utils exfat-fuse
+
+AP
+Check Device: $ iw list | less #Ref about Functions ( intersted in AP )
+Conventions: filenameBU.ext (backup) 
+
+sudo su
+sudo apt-get install dnsmasq hostapd -y
+
+cp dhcpcd.conf dhcpcdBU.conf
+nano /etc/dhcpcd.conf
+
+add before any interface command Here in end
+denyinterfaces wlan0
+
+at end add here
+cp /etc/network/interfaces /etc/network/interfacesBU
+nano /etc/network/interfaces
+
+allow-hotplug wlan0
+iface wlan0 inet static
+	address 192.168.0.120
+	netmask 255.255.255.0
+	network 192.168.0.100
+	broadcast 192.168.0.255
+#	wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+
+https://www.raspberrypi.org/forums/viewtopic.php?t=191453
+
