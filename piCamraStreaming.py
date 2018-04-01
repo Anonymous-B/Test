@@ -1,38 +1,21 @@
 import cv2
+import numpy as np
+from imutils.video.pivideostream import PiVideoStream
 import sys
-from mail import sendEmail
-from flask import Flask, render_template, Response
-from camera import VideoCamera
 import time
 import threading
-
-import cv2
-from imutils.video.pivideostream import PiVideoStream
+from flask import Flask, render_template, Response
 import imutils
-import time
-import numpy as np
-
 import smtplib
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 from email.MIMEImage import MIMEImage
 
-email_update_interval = 600  # sends an email only once in this time interval
-video_camera = VideoCamera(flip=False)  # creates a camera object, flip vertically
-object_classifier = cv2.CascadeClassifier("fullbody_recognition_model.xml")  # an opencv classifier
 
 # App Globals (do not edit)
 app = Flask(__name__)
 last_epoch = 0
 
-# Email you want to send the update from (only works with gmail)
-fromEmail = 'email@gmail.com'
-# You can generate an app password here to avoid storing your password in plain text
-# https://support.google.com/accounts/answer/185833?hl=en
-fromEmailPassword = 'password'
-
-# Email you want to send the update to
-toEmail = 'email2@gmail.com'
 
 class VideoCamera(object):
     def __init__(self, flip = False):
@@ -133,9 +116,16 @@ def sendEmail(image):
     smtp.quit()
 
 
+email_update_interval = 600  # sends an email only once in this time interval
+video_camera = VideoCamera(flip=False)
+object_classifier = cv2.CascadeClassifier("fullbody_recognition_model.xml")
+
+fromEmail = 'email@gmail.com'
+toEmail = 'email2@gmail.com'
+fromEmailPassword = 'password'
 
 if __name__ == '__main__':
     t = threading.Thread(target=check_for_objects, args=())
     t.daemon = True
     t.start()
-    app.run(host='0.0.0.0', debug=False)
+    app.run(host='192.168.0.102', debug=False)
