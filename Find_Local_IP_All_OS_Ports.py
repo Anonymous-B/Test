@@ -1,8 +1,9 @@
 import os
 import socket
 
-# for win the os is nt and command is only ip = socket.gethostbyname(socket.gethostname())
- if os.name != "nt":
+''' for win the os is nt and command is only ip = socket.gethostbyname(socket.gethostname())'''
+
+if os.name != "nt":
     import struct
     import fcntl
 
@@ -10,6 +11,7 @@ import socket
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         return socket.inet_ntoa(fcntl.ioctl(s.fileno(), 0x8915, struct.pack('256s',
                                 ifname[:15]))[20:24])
+
 
 def get_lan_ip():
     ip = socket.gethostbyname(socket.gethostname())
