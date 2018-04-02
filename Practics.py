@@ -1,2 +1,6 @@
+import socket
+import os
 
-str.format('Bilal is a gy have gps {}')
+c = os.name
+print(c)
+
