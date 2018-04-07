@@ -1,17 +1,19 @@
-#!/usr/bin/env python
-from __future__ import print_function       #should be on the top
 import threading
 import time
 
 
-class MyThread(threading.Thread):
-    def run(self):
-        print("{} started!".format(self.getName()))              # "Thread-x started!"
-        time.sleep(1)                                      # Pretend to work for a second
-        print("{} finished!".format(self.getName()))             # "Thread-x finished!"
+def loop1_10():
+    for i in range(1, 11):
+        time.sleep(5)
+        print(i)
 
-if __name__ == '__main__':
-    for x in range(4):                                     # Four times...
-        mythread = MyThread(name = "Thread-{}".format(x + 1))  # ...Instantiate a thread and pass a unique ID to it
-        mythread.start()                                   # ...Start the thread
-        time.sleep(.9)
+
+def loop1_11():
+    for i in range(1, 11):
+        print('This is in wait' + str(i))
+
+
+for i in range(1, 100):
+    threading.Thread(target=loop1_10).start()
+    threading.Thread(target=loop1_11).start()
+    print(threading.active_count())
